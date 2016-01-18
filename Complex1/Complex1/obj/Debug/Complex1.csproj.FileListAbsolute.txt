@@ -1,6 +1,0 @@
-C:\Users\alser\Desktop\Adel\git\Complex1\Complex1\bin\Debug\Complex1.exe.config
-C:\Users\alser\Desktop\Adel\git\Complex1\Complex1\obj\Debug\Complex1.csprojResolveAssemblyReference.cache
-C:\Users\alser\Desktop\Adel\git\Complex1\Complex1\bin\Debug\Complex1.exe
-C:\Users\alser\Desktop\Adel\git\Complex1\Complex1\bin\Debug\Complex1.pdb
-C:\Users\alser\Desktop\Adel\git\Complex1\Complex1\obj\Debug\Complex1.exe
-C:\Users\alser\Desktop\Adel\git\Complex1\Complex1\obj\Debug\Complex1.pdb
