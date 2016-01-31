@@ -18,7 +18,7 @@ namespace Lab2Ex3
             StreamWriter sw = new StreamWriter(foutput);
             string s = sr.ReadLine();
             string[] token = s.Split();
-            int min = 0;
+            int min = int.Parse(token[0]);
             foreach (string b in token)
             {
                 int a = int.Parse(b);
@@ -32,15 +32,16 @@ namespace Lab2Ex3
                 {
                     if (a <= min)
                         min = a;
-                    sw.WriteLine(min);
-                    finput.Close();
-                    foutput.Close();
-                    sw.Close();
-                    sr.Close();
-                    Console.ReadKey();
-
                 }
             }
+            sw.WriteLine(min);
+
+            sw.Close();
+            sr.Close();
+            finput.Close();
+            foutput.Close();
+
+            Console.ReadKey();
 
         }
     }
