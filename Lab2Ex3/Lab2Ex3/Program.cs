@@ -35,7 +35,6 @@ namespace Lab2Ex3
                 }
             }
             sw.WriteLine(min);
-
             sw.Close();
             sr.Close();
             finput.Close();
