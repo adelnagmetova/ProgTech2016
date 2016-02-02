@@ -27,7 +27,14 @@ namespace Lab2Ex2
                     max = int.Parse(i);
 
             }
+            int min = int.Parse(token[0]);
+            foreach(string a in token)
+            {
+                if (int.Parse(a) < min)
+                    min = int.Parse(a);
+            }
             sw.WriteLine(max);
+            sw.WriteLine(min);
             sw.Close();
             sr.Close();
             finput.Close();
