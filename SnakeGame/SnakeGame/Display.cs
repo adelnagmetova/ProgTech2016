@@ -12,7 +12,7 @@ namespace SnakeGame
         {
             
             Console.SetCursorPosition(5, 3);
-            Console.Write("SCORE:" + Snake.score +  "                  " + " LEVEL: " + Wall.lvl);
+            Console.Write("SCORE:" + Snake.score +  "                  " + " LEVEL: " + Wall.lvl); // выводятся надписи на экран
             
 
         }

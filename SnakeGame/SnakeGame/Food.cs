@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnakeGame
 {
+    [Serializable]
     class Food : Drawer
     {
         public Food()
@@ -16,26 +17,33 @@ namespace SnakeGame
         }
         public void SetNewPosition()
         {
-            int x = new Random().Next(2, 70);
-            int y = new Random().Next(5, 20);
-           // int x = 2, y = 20;
+            body.Clear();
+            // int x = new Random().Next(2, 70);// еда будет появляться рандомно в этих пределах по горизонтали
+            //int y = new Random().Next(5, 20);// по вертикали
 
-            if (body.Count == 0)
-                body.Add(new Point(x, y));
-            else
-            {
-                body[0].x = x;
-                body[0].y = y;
-            }
+            Game.food.body.Add(new Point (new Random().Next(2, 70), new Random().Next(5, 20) ));
+
+          
+            
             
         }
-        public static bool FoodinSnake()
+
+        public static bool FoodinWall()// проверка еды в стене
         {
-            foreach (Point p in Game.snake.body)
-                if (Game.snake.body[0].x == p.x && Game.snake.body[0].y == p.y)
-                    return false;
-            return true;
+            foreach(Point p in Game.wall.body)
+                if (Game.food.body[0].x == p.x && Game.food.body[0].y == p.y)
+                    return true;
+            return false;
         }
+
+        public static bool FoodinSnake() //проверка на нахождение еды в внутри змейки
+        {
+            for(int i=0; i<Game.snake.body.Count; i++)
+                if (Game.food.body[0].x == Game.snake.body[i].x && Game.food.body[0].y == Game.snake.body[i].y)
+                    return true;
+            return false;
+        }
+        
 
 
     }

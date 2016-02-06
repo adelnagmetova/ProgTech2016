@@ -5,18 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SnakeGame
 {
+    [Serializable]
     class Drawer
     {
         public ConsoleColor color;
         public char sign;
-        public List<Point> body = new List<Point>();
+        public List<Point> body = new List<Point>();// создается вектор поинтов
 
         public Drawer() { }
 
-        public void Draw()
+        public void Draw() 
         {
             Console.ForegroundColor = color;
             foreach (Point p in body)
@@ -29,43 +31,44 @@ namespace SnakeGame
             }
         }
 
-        public void Save()
+        public void Save()// используем сериализацию, чтобы сохранить игру
         {
             string fileName = "";
             if (sign == '*')
-                fileName = "food.xml";
+                fileName = "food.dat";
             if (sign == '#')
-                fileName = "wall.xml";
+                fileName = "wall.dat";
             if (sign == 'o')
-                fileName = "snake.xml";
-
+                fileName = "snake.dat";
+            // для каждого класса создается отдельный дат файл
             FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            XmlSerializer xs = new XmlSerializer(GetType());
+            BinaryFormatter bf = new BinaryFormatter();
 
-            xs.Serialize(fs, this);
+            bf.Serialize(fs, this);
             fs.Close();
         }
 
         public void Resume()
+            // чтобы вернуться в предыдущее место делаем десериализатор
         {
             string fileName = "";
             if (sign == '*')
-                fileName = "food.xml";
+                fileName = "food.dat";
             if (sign == '#')
 
-                fileName = "wall.xml";
+                fileName = "wall.dat";
             if (sign == 'o')
-                fileName = "snake.xml";
+                fileName = "snake.dat";
             FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            XmlSerializer xs = new XmlSerializer(GetType());
+            BinaryFormatter bf = new BinaryFormatter();
 
             if (sign == '*')
-                Game.food = xs.Deserialize(fs) as Food;
+                Game.food = bf.Deserialize(fs) as Food;
             if (sign == '#')
-                Game.wall = xs.Deserialize(fs) as Wall;
+                Game.wall = bf.Deserialize(fs) as Wall;
 
             if (sign == 'o')
-                Game.snake = xs.Deserialize(fs) as Snake;
+                Game.snake = bf.Deserialize(fs) as Snake;
 
             fs.Close();
 

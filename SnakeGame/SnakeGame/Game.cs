@@ -8,31 +8,40 @@ namespace SnakeGame
 {
     class Game
     {
-        
-        public static Food food = new Food();
+        // создаются экземпляры классов
+        public static Food food = new Food(); 
         public static Snake snake = new Snake();
         public static Wall wall = new Wall();
-        public bool GameOver = false;
+        public static bool GameOver = false;
         public Game ()
         {
-           // Console.SetWindowPosition(30, 30);
+           
             Init();
             Play();
         }
         public void Init()
         {            
-            food.SetNewPosition();
-            wall.Level(Wall.lvl);
+            food.SetNewPosition(); // еда появляется 
+            wall.Level(Wall.lvl); // появляется лабиринт уровня
+            while( Food.FoodinSnake() == true|| Food.FoodinWall() == true)
+            {
+                food.SetNewPosition();
+            }
+
+            while(Game.snake.CollisionWithWall())
+            {
+                Snake.SnakeNewPosition();
+            }
         }
         
 
 
         public void Play()
         {
-            while (!GameOver)
+            while (!GameOver) // пока змейка не столкнулась со стенкой
             {
-                Draw();
-                ConsoleKeyInfo button = Console.ReadKey();
+                Draw(); // рисуем змейку, еду и лабиринт
+                ConsoleKeyInfo button = Console.ReadKey(); // считываем кнопки движения
                
                     if (button.Key == ConsoleKey.UpArrow)
                         snake.move(0, -1);
@@ -48,20 +57,20 @@ namespace SnakeGame
                         Resume();
                     if (button.Key == ConsoleKey.F5)
                         wall.Level(2);
-                    GameOver = snake.CollisionWithWall();
-                if (Food.FoodinSnake())
-                    Game.food.SetNewPosition();
-                GameOver = Snake.SnakeinSnake();
-
+                    //GameOver = snake.CollisionWithWall();// если змейка столкнулась, игра заканчивается
+              
                 }
+
             
-            Console.Clear();
+            }
+        public static void  EndGame() 
+        {
+            Console.Clear();// очищаем консоль
             Console.SetCursorPosition(10, 10);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Game Over!");
+            Console.WriteLine("Game Over!");// выводим надпись
             Console.WriteLine("Try again!");
             Console.ReadKey();
-
 
         }
         public static void Draw()
@@ -84,12 +93,5 @@ namespace SnakeGame
             food.Resume();
             wall.Resume();
         }
-        public static void NewPositionSnake()
-        {
-            snake.body.Clear();
-            snake.body.Add(new Point(new Random().Next(2, 70), new Random().Next(3, 18)));
-            Game.Draw();
-        }
-
     }
 }

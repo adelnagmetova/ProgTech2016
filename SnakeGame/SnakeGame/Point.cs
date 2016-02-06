@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SnakeGame
 {
-    class Point
+    [Serializable]
+    class Point// создается класс точка
     {
         public int x;
         public int y;
